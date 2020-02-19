@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Live Chat!</title>
+</head>
+
+<body class="w3-dark-grey">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <div id=app> 
+        <div class="w3-row-padding">
+            <div id="wrapper">
+                <div class="w3-col s2">&nbsp;</div>
+                <div class="w3-col s8">
+                    <div class="w3-container w3-red w3-center w3-section w3-round-xlarge">
+                        <h1>Live Chat!</h1>
+                    </div>
+
+                </div> 
+                <div class="w3-col s2">&nbsp;</div>
+            </div>
+        </div>
+
+        <!--
+        <button v-on:click="getData()" class="w3-center w3-button">
+            Refresh 
+        </button>
+        -->
+
+        <!-- 
+            <div style="width:90% ; margin-left: auto ; margin-right: auto">
+        -->
+        <ul style="list-style-type:none ; list-style-position: inside; padding: 0">
+            <li class="irc-item" v-for="item in items">
+                <div class="w3-row">    
+                    <div class="w3-col s1">&nbsp;</div>
+                    <div class="w3-col s10">
+                        <div class="w3-container w3-blue w3-section w3-round-xlarge" >
+                            {{item}}
+                        </div>
+                    </div>
+                    <div class="w3-col s1">&nbsp;</div>
+                </div>
+            </li>
+        </ul>
+        <!--
+        </div>
+        --> 
+        
+        <div class="w3-container w3-padding w3-margin w3-red w3-round-xlarge" >
+        
+            <div class="w3-row-padding">
+            
+                <div class="w3-col s2"> &nbsp; </div>
+                <div class="w3-col s8">
+                    <div class="w3-container w3-teal  w3-padding w3-section w3-round-xlarge">
+                        name: <input v-model="name" placeholder="enter a name" size=12>
+                    </div>
+                </div> 
+                <div class="w3-col s2"> &nbsp; </div>
+            
+            </div>
+            
+            <div class="w3-row-padding">
+                
+                <div class="w3-col s2"> &nbsp; </div> 
+                <div class="w3-col s8">
+                    <div class="w3-container w3-teal w3-padding w3-section w3-round-xlarge">
+                        message: 
+                        <input v-model="input" placeholder="enter a msg" size=12  
+                        v-on:keydown.enter='sendData()'>
+                
+                        <button v-on:click="sendData()">
+                            Send
+                        </button>
+                    </div>
+                </div> 
+                <div class="w3-col s2"> &nbsp; </div>
+            
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        //const axios = require('axios');
+        
+        var app = new Vue({
+            el: '#app',
+            data: {
+                counter : 0 ,
+                input: "" ,
+                name: "noName",
+                items: ["hello","to","you","all"]
+            },
+            methods: {
+                getData: function () {
+                    axios.post("http://" + location.host + "/out")
+                        .then(this.processData) ;
+                } ,
+                sendData: function () {
+                    msg = this.input ;
+                    name = this.name ;
+                    params = new URLSearchParams() ;
+                    params.append('message', msg ) ;
+                    params.append('name', name) ;
+                    
+                    axios.post("http://" + location.host + "/msg", params)
+                        .then(function (response) {console.log("FROM MSG: " + response.data); }) ;
+                    this.input = "" ; 
+                },
+                processData: function (response) {
+                    console.log(response);
+                    var list = response.data.split(/\r?\n/) ;
+                    this.items = [] ;
+                    this.counter = this.counter + 1 ;
+                    console.log("Request Number: " + this.counter) ;
+                    for (index in list) {
+                        console.log(list[index]) ;
+                        this.items[index] = list[index] ;
+                    } 
+                }
+            },
+            mounted: function () {
+                window.setInterval(() => {
+                this.getData()
+                }, 1000)
+            }
+        }) ;
+        app.getData() ; 
+    </script>
+
+</body>
+</html>
