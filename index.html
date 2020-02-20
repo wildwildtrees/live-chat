@@ -27,6 +27,19 @@
             </div>
         </div>
 
+
+        <div class="w3-row-padding">
+            
+            <div class="w3-col s2"> &nbsp; </div>
+            <div class="w3-col s8">
+                <div class="w3-container w3-teal  w3-padding w3-section w3-round-xlarge">
+                    name: <input v-model="name" placeholder="enter a name" size=12>
+                </div>
+            </div> 
+            <div class="w3-col s2"> &nbsp; </div>
+    
+        </div>
+
         <!--
         <button v-on:click="getData()" class="w3-center w3-button">
             Refresh 
@@ -52,28 +65,38 @@
         <!--
         </div>
         --> 
+
+
+        <div class="w3-container w3-padding w3-margin w3-red w3-round-xlarge" >
+        
+                
+            
+            <div class="w3-row-padding">
+            
+                <div class="w3-col s0 m2"> &nbsp; </div> 
+                <div class="w3-col s12 m8">
+                    <div class="w3-container w3-teal w3-padding w3-section w3-round-xlarge">
+                        SPACER
+                    </div>
+                </div> 
+                <div class="w3-col s0 m2"> &nbsp; </div>
+        
+            </div>
+            
+        </div>
+
         
         <div class="w3-bottom">
             <div class="w3-container w3-padding w3-margin w3-red w3-round-xlarge" >
         
-                <div class="w3-row-padding">
-            
-                    <div class="w3-col s2"> &nbsp; </div>
-                    <div class="w3-col s8">
-                        <div class="w3-container w3-teal  w3-padding w3-section w3-round-xlarge">
-                            name: <input v-model="name" placeholder="enter a name" size=12>
-                        </div>
-                    </div> 
-                    <div class="w3-col s2"> &nbsp; </div>
-            
-                </div>
+                
             
                 <div class="w3-row-padding">
                 
-                    <div class="w3-col s2"> &nbsp; </div> 
-                    <div class="w3-col s8">
+                    <div class="w3-col s0 m2"> &nbsp; </div> 
+                    <div class="w3-col s12 m8">
                         <div class="w3-container w3-teal w3-padding w3-section w3-round-xlarge">
-                            message: 
+ 
                             <input v-model="input" placeholder="enter a msg" size=12  
                             v-on:keydown.enter='sendData()'>
                 
@@ -82,7 +105,7 @@
                             </button>
                         </div>
                     </div> 
-                    <div class="w3-col s2"> &nbsp; </div>
+                    <div class="w3-col s0 m2"> &nbsp; </div>
             
                 </div>
                 
@@ -121,7 +144,7 @@
                 },
                 processData: function (response) {
                     console.log(response);
-                    var list = response.data.split(/\r?\n/) ;
+                    var list = response.data.split(/\r?\n/).filter(line => line != "") ;
                     this.items = [] ;
                     this.counter = this.counter + 1 ;
                     console.log("Request Number: " + this.counter) ;
