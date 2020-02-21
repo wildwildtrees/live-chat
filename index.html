@@ -33,7 +33,7 @@
             <div class="w3-col s2"> &nbsp; </div>
             <div class="w3-col s8">
                 <div class="w3-container w3-teal  w3-padding w3-section w3-round-xlarge">
-                    name: <input v-model="name" placeholder="enter a name" size=12>
+                    name: <input v-model="name" @focus="hideMessenger()" @blur="showMessenger()" @keydown.enter="$event.target.blur()" placeholder="enter a name" size=12>
                 </div>
             </div> 
             <div class="w3-col s2"> &nbsp; </div>
@@ -86,7 +86,7 @@
         </div>
 
         
-        <div class="w3-bottom" >
+        <div class="w3-bottom" v-if="shownMessenger">
             <div class="w3-container w3-padding w3-margin w3-red w3-round-xlarge" >
         
                 
@@ -98,7 +98,7 @@
                         <div class="w3-container w3-teal w3-padding w3-section w3-round-xlarge">
  
                             <input v-model="input" placeholder="enter a msg" size=12  
-                            v-on:keydown.enter='sendData()'>
+                            v-on:keydown.enter='sendData()' autocomplete="on">
                 
                             <button v-on:click="sendData()">
                                 Send
@@ -124,7 +124,8 @@
                 counter : 0 ,
                 input: "" ,
                 name: "noName",
-                items: ["hello","to","you","all"]
+                items: ["hello","to","you","all"],
+                shownMessenger: true  
             },
             methods: {
                 getData: function () {
@@ -152,6 +153,12 @@
                         console.log(list[index]) ;
                         this.items[index] = list[index] ;
                     } 
+                },
+                showMessenger: function () {
+                    this.shownMessenger = true ;
+                },
+                hideMessenger: function () {
+                    this.shownMessenger = false ;
                 }
             },
             mounted: function () {

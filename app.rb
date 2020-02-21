@@ -5,8 +5,10 @@ set :port, 8000
 
 outfile = 'out'
 
+linecount = 10 
+
 post '/out' do
-   IO.readlines(outfile).last(10).join("")
+   IO.readlines(outfile).last(linecount).join("")
 end
 
 #get '/hello' do     
