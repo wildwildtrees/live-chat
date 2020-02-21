@@ -141,7 +141,8 @@
                     
                     axios.post("http://" + location.host + "/msg", params)
                         .then(function (response) {console.log("FROM MSG: " + response.data); }) ;
-                    this.input = "" ; 
+                    this.input = "" ;
+                    this.scrollToBottom() ;  
                 },
                 processData: function (response) {
                     console.log(response);
@@ -156,9 +157,13 @@
                 },
                 showMessenger: function () {
                     this.shownMessenger = true ;
+                    this.scrollToBottom() ; 
                 },
                 hideMessenger: function () {
                     this.shownMessenger = false ;
+                },
+                scrollToBottom: function () {
+                    window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
                 }
             },
             mounted: function () {
