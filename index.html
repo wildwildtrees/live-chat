@@ -97,7 +97,7 @@
                     <div class="w3-col s12 m8">
                         <div class="w3-container w3-teal w3-padding w3-section w3-round-xlarge">
  
-                            <input v-model="input" placeholder="enter a msg" size=12  
+                            <input ref="messenger" v-model="input" placeholder="enter a msg" size=12  
                             v-on:keydown.enter='sendData()' autocomplete="on">
                 
                             <button v-on:click="sendData()">
@@ -164,6 +164,10 @@
                 },
                 scrollToBottom: function () {
                     window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+                    Vue.nextTick(() => { this.focusInput(); });
+                },
+                focusInput : function () {
+                    this.$refs.messenger.focus() ;
                 }
             },
             mounted: function () {
