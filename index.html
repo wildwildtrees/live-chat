@@ -54,8 +54,10 @@
                 <div class="w3-row">    
                     <div class="w3-col s1">&nbsp;</div>
                     <div class="w3-col s10">
-                        <div class="w3-container w3-blue w3-section w3-padding w3-round-xlarge" >
-                            {{item}}
+                        <div class="w3-container w3-blue w3-section w3-padding w3-round-xlarge" style="display: inline-block">
+                            
+                                {{item}}
+                            
                         </div>
                     </div>
                     <div class="w3-col s1">&nbsp;</div>
@@ -66,36 +68,40 @@
         </div>
         --> 
 
-
+        <!--
         <div class="w3-container w3-padding w3-margin w3-red w3-round-xlarge" >
-        
+        -->
                 
             
             <div class="w3-row-padding">
             
                 <div class="w3-col s0 m2"> &nbsp; </div> 
                 <div class="w3-col s12 m8">
-                    <div class="w3-container w3-teal w3-padding w3-section w3-round-xlarge">
-                        SPACER
+                    <div class="w3-container w3-dark-grey w3-text-dark-grey w3-padding w3-section w3-round-xlarge">
+                        &nbsp;
                     </div>
                 </div> 
                 <div class="w3-col s0 m2"> &nbsp; </div>
         
             </div>
             
+        <!--
         </div>
+        -->
 
         
         <div class="w3-bottom" v-if="shownMessenger">
+            
+            <!--
             <div class="w3-container w3-padding w3-margin w3-red w3-round-xlarge" >
-        
+            -->
                 
             
                 <div class="w3-row-padding">
                 
                     <div class="w3-col s0 m2"> &nbsp; </div> 
                     <div class="w3-col s12 m8">
-                        <div class="w3-container w3-teal w3-padding w3-section w3-round-xlarge">
+                        <div class="w3-container w3-teal w3-padding w3-section w3-round-xlarge" style="">
  
                             <input ref="messenger" v-model="input" placeholder="enter a msg" size=12  
                             v-on:keydown.enter='sendData()' autocomplete="on">
@@ -109,7 +115,9 @@
             
                 </div>
                 
+            <!--
             </div>
+            -->
         </div>
 
 
